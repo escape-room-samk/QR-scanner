@@ -13,6 +13,14 @@ This guide will show you how to create a QR code reader by using the `zbarlight`
 
 If you are using the Raspberry Pi headless (Without a monitor, keyboard or mouse), You will need to connect to the internet using the ethernet port (for Raspberry Pi 2) or through the Wifi (on a Raspberry Pi 3 [[Tutorial](https://github.com/rijinmk/guide-to-wifi-terminal-rpi3)] ) and then you will have to use [SSH](https://github.com/rijinmk/guide-to-ssh-rpi3) to connect to your Raspberry Pi. 
 
+### simple test
+
+```bash
+https://www.raspberrypi.org/documentation/usage/camera/raspicam/raspistill.md
+```
+
+
+
 ### Installation process 
 
 Here onwards everything will be on the terminals. Press `CTRL + ALT + T` to open up the terminals. 
@@ -42,6 +50,13 @@ ls /dev/ | grep video
 ```
 
 If `video0` is the output that means you are good to go, The webcam is connected. Now enter: 
+
+if not
+
+```bash
+sudo rpi-update # to make sure the v4L2 drive is available.
+sudo modprobe bcm2835-v4l2 # to load it and create /dev/video0
+```
 
 ```bash
 sudo fswebcam image.jpg
