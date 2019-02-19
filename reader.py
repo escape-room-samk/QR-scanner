@@ -2,6 +2,10 @@ import zbarlight
 import os
 import sys
 import PIL
+import requests
+
+API_ENDPOINT = "http://localhost:3000/api/qrReader"
+
 
 print 'Taking picture..'
 try:
@@ -25,11 +29,26 @@ if(f):
     if(codes==None):
         os.remove('qr_codes/qr_'+str(qr_count)+'.jpg')
         print 'No QR code found'
+        data = {
+         "devID": "QR_Scanner",
+         "QRMessage": "no QR code found"
+        }
     else:
         print 'QR code(s):'
         print codes
-
         
+        data = {
+         "devID": "QR_Scanner",
+         "QRMessage": codes
+        }
+    try:
+        r = requests.post(url=API_ENDPOINT, data=data)
+        # extracting response text
+        pastebin_url = r.text
+        print("The pastebin URLis: %s" % pastebin_url)
+    except:
+        print("An exception occurred")
+
         # f = open('qr_code_messages.txt','a')
         # for i in range(len(codes)):
         #     f.write(codes[i])
