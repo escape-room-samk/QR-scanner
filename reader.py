@@ -28,9 +28,11 @@ if(f):
     else:
         print 'QR code(s):'
         print codes
-        f = open('qr_code_messages.txt','a')
-        for i in range(len(codes)):
-            f.write(codes[i])
-            if(i!=len(codes)-1):
-                f.write('^')
-        f.write('~')
+
+        
+        # f = open('qr_code_messages.txt','a')
+        # for i in range(len(codes)):
+        #     f.write(codes[i])
+        #     if(i!=len(codes)-1):
+        #         f.write('^')
+        # f.write('~')
