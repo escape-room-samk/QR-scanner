@@ -5,7 +5,7 @@ import sys
 import PIL
 import requests
 
-API_ENDPOINT = "http://localhost:3000/api/qrReader"
+API_ENDPOINT = "http://172.17.2.99:3000/api/qrReader"
 
 import time
 
@@ -44,12 +44,12 @@ while True:
          "devID": "QR_Scanner",
          "QRMessage": codes
         }
-    try:
-        r = requests.post(url=API_ENDPOINT, data=data)
-        # extracting response text
-        pastebin_url = r.text
-        print("The pastebin URLis: %s" % pastebin_url)
-    except:
-        print("An exception occurred")
+        try:
+            r = requests.post(url=API_ENDPOINT, data=data)
+            # extracting response text
+            pastebin_url = r.text
+            print("The pastebin URLis: %s" % pastebin_url)
+        except:
+            print("An exception occurred")
     print
     time.sleep(5)
