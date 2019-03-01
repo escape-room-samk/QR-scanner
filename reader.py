@@ -29,26 +29,21 @@ while True:
         qr = PIL.Image.open(f)
         qr.load()
         codes = zbarlight.scan_codes('qrcode',qr)
-        
     if(codes==None):
         os.remove('qr_codes/qr_'+str(qr_count)+'.jpg')
         print 'No QR code found'
-        data = {
-         "devID": "QR_Scanner",
-         "QRMessage": "no QR code found"
-        }
     else:
         print 'QR code(s):'
         print codes
         data = {
-         "devID": "QR_Scanner",
-         "QRMessage": codes
-        }
+                "devID": "QR_Scanner",
+                "QRMessage": codes
+            }
         try:
             r = requests.post(url=API_ENDPOINT, data=data)
             # extracting response text
             pastebin_url = r.text
-            print("The pastebin URLis: %s" % pastebin_url)
+            print(pastebin_url)
         except:
             print("An exception occurred")
     print
