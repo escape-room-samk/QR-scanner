@@ -5,7 +5,7 @@ import sys
 import PIL
 import requests
 
-API_ENDPOINT = "http://172.17.2.99:3000/api/qrReader"
+API_ENDPOINT = "http://172.17.2.10:3000/api/qrReader"
 
 import time
 
@@ -29,6 +29,8 @@ while True:
         qr = PIL.Image.open(f)
         qr.load()
         codes = zbarlight.scan_codes('qrcode',qr)
+        
+        
     if(codes==None):
         os.remove('qr_codes/qr_'+str(qr_count)+'.jpg')
         print 'No QR code found'
@@ -37,7 +39,7 @@ while True:
         print codes
         data = {
                 "devID": "QR_Scanner",
-                "QRMessage": codes
+                "boolean": "True"
             }
         try:
             r = requests.post(url=API_ENDPOINT, data=data)
